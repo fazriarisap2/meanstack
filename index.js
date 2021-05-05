@@ -13,6 +13,13 @@ mongoose.connect(config.uri,(err) => {
     }
 });
 
+
+app.use(express.static(__dirname + '/client/dist/client'));
+
+app.get('*', (req, res, next)=>{
+    res.sendFile(path.join(__dirname + '/client/dist/client/index.html'));
+})
+
 app.set('port', process.env.port || 3000) 
 
 app.get('/', (req, res, next) =>{
